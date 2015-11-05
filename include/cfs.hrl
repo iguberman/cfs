@@ -25,9 +25,6 @@ when Job    :: job(),
      NewJob :: job().
 
 
--spec and_apply( Job, Module, Function, Args ) -> ok
-when Job      :: job(),
-     Module   :: atom(),
-     Function :: atom(),
-     Args     :: [_].
-							  
+-spec commence( Job, Precond ) -> ok
+when Job     :: job(),						  
+     Precond :: reference().

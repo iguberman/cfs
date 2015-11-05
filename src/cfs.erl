@@ -1,7 +1,7 @@
 -module( cfs ).
 -author( "Jörgen Brandt <brandjoe@hu-berlin.de>" ).
 
--behaviour( gen_server ).
+-behaviour( tract ).
 
 %% ============================================================
 %% Includes
@@ -16,7 +16,7 @@
 -export( to/1, from/1, stage/2, and_apply/4 ).
 
 %% ============================================================
-%% Generic Server Exports
+%% Tract Exports
 %% ============================================================
 
 -export( [] ).
@@ -42,17 +42,15 @@ when is_atom( Direction ),
      is_list( Name ) ->
   {Direction, LocalDir, [Name|NameList]}.
 
-and_apply( {Direction, LocalDir, NameList}, Module, Function, Args ) ->
+commence( {Direction, LocalDir, NameList}, Precond )
 when is_atom( Direction ),
      is_list( LocalDir ),
      is_list( NameList ),
-     is_atom( Module ),
-     is_atom( Function ),
-     is_list( Args ) ->
-  gen_server:call( cfs, {Direction, LocalDir, NameList, Module, Function, Args} ).
+     is_reference( Precond ) ->
+  tract:send_replay( cfs, 
        
 
 %% ============================================================
-%% Generic Server Functions
+%% Tract Functions
 %% ============================================================
 
